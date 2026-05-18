@@ -11,11 +11,11 @@
      <h3>PDO連線</h3>
      <?php
      $dsn="mysql:host=localhost;charset=utf8;dbname=school";
-     $pod=new PDO($dsn,'root','');
+     $pdo=new PDO($dsn,'root','');
 
-     $sql="SELECT * FROM `dept` ";
+     $sql="SELECT * FROM `dept`";
 
-     $depts=$pdo->query($sql)->fetchA11(PDO::FETCH_ASSOC);
+     $depts=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
      echo "<pre>";
      print_r($depts);
@@ -26,31 +26,30 @@
      echo "<h3>新增資料</h3>";
      echo $sql_insert;
      echo "<hr>";
-     $dept=$pdo->query($sql)->fetchA11(PDO::FETCH_ASSOC);
+     $depts=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
      echo "<pre>";
-     print_($depts);
+     print_r($depts);
      echo "</pre>";
 
      echo "<h3>更新資料</h3>";
-     $sql_update="UPDATE `dept` SET `code`='602' , `name`='西餐科' WHERE `id`='8';
-$pdo->exec($sql_update);
-echo $sql_update;
-echo "<hr>";
-$dept=$pdo->query($sql)->fetchA11(PDO::FETCH_ASSOC);
-echo "<pre>";
-print_r($depts);
-echo "</pre>";
+     $sql_update="UPDATE `dept` SET `code`='602' , `name`='西餐科' WHERE `id`='8'";
+     $pdo->exec($sql_update);
+     echo $sql_update;
+     echo "<hr>";
+     $depts=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+     echo "<pre>";
+     print_r($depts);
+     echo "</pre>";
 
      echo "<h3>刪除資料</h3>";
      $sql_delete="DELETE FROM `dept` WHERE `id`='9'";
      $pdo->exec($sql_delete);
      echo $sql_delete;
      echo "<hr>";
-     $dept=$pdo->query($sql)->fetchA11(PDO::FETCH_ASSOC);
+     $depts=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
      echo "<pre>";
-print_r($depts);
-echo "</pre>";
-
+     print_r($depts);
+     echo "</pre>";
 
      ?>
 
