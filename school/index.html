@@ -6,6 +6,381 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>翠園高中 - 校園首頁</title>
      <style>
+          /* ==========================================
+   1. 全域初始化與日系校園配色
+   ========================================== */
+:root {
+     --primary-color: #1a365d;   /* 經典學院藏青藍，展現知性與沉穩 */
+     --accent-color: #48bb78;    /* 青春校園草綠色，用於點綴與活力感 */
+     --text-dark: #2d3748;       /* 深灰文字，比純黑更溫柔、乾淨 */
+     --text-light: #718096;      /* 輔助文字淺灰 */
+     --bg-light: #fafbfc;        /* 微帶透亮感的極淺灰背景 */
+     --white: #ffffff;
+     --border-color: #e2e8f0;    /* 用線條取代陰影，更顯乾淨 */
+     --transition: all 0.25s ease;
+}
+
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+
+body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+     color: var(--text-dark);
+     background-color: var(--bg-light);
+     line-height: 1.7;
+     letter-spacing: 0.5px; /* 微調字距，閱讀更舒服 */
+}
+
+a {
+     text-decoration: none;
+     color: inherit;
+     transition: var(--transition);
+}
+
+ul {
+     list-style: none;
+}
+
+/* ==========================================
+   2. 頂部導航欄 (極簡白底)
+   ========================================== */
+.navbar {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     background-color: rgba(255, 255, 255, 0.9);
+     border-bottom: 1px solid var(--border-color); /* 用細線取代陰影，更乾淨 */
+     z-index: 1000;
+     backdrop-filter: blur(8px);
+}
+
+.nav-container {
+     max-width: 1100px;
+     margin: 0 auto;
+     padding: 18px 20px;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+
+.nav-logo {
+     font-size: 1.25rem;
+     font-weight: 700;
+     color: var(--primary-color);
+     display: flex;
+     align-items: center;
+     gap: 8px;
+}
+
+.nav-links {
+     display: flex;
+     gap: 35px;
+}
+
+.nav-links a {
+     font-size: 0.95rem;
+     font-weight: 500;
+     color: var(--text-dark);
+     position: relative;
+}
+
+/* 導航欄底線滑過特效 */
+.nav-links a::after {
+     content: '';
+     position: absolute;
+     width: 0;
+     height: 2px;
+     bottom: -6px;
+     left: 0;
+     background-color: var(--accent-color);
+     transition: var(--transition);
+}
+
+.nav-links a:hover::after {
+     width: 100%;
+}
+
+.nav-links a:hover {
+     color: var(--accent-color);
+}
+
+.nav-buttons {
+     display: flex;
+     gap: 15px;
+}
+
+.btn-login, .btn-register {
+     padding: 6px 16px;
+     border-radius: 4px; /* 稍微方正的幾何感，更具規律與乾淨感 */
+     font-size: 0.9rem;
+     font-weight: 500;
+}
+
+.btn-login {
+     color: var(--text-light);
+}
+
+.btn-login:hover {
+     color: var(--primary-color);
+}
+
+.btn-register {
+     background-color: var(--primary-color);
+     color: var(--white);
+}
+
+.btn-register:hover {
+     background-color: #2a4365;
+     transform: translateY(-1px);
+}
+
+/* ==========================================
+   3. 首頁橫幅 (清新、大氣、留白)
+   ========================================== */
+.hero-section {
+     height: 55vh;
+     min-height: 380px;
+     /* 使用柔和的學院藍漸層，明亮不沉重 */
+     background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     text-align: center;
+     color: var(--white);
+     padding: 0 20px;
+     margin-top: 65px;
+}
+
+.hero-content h1 {
+     font-size: 2.5rem;
+     font-weight: 700;
+     margin-bottom: 12px;
+     letter-spacing: 3px;
+}
+
+.hero-content p {
+     font-size: 1.1rem;
+     margin-bottom: 28px;
+     opacity: 0.85;
+     font-weight: 300;
+}
+
+.hero-button {
+     background-color: transparent;
+     color: var(--white);
+     border: 1px solid rgba(255, 255, 255, 0.7);
+     padding: 10px 30px;
+     font-size: 0.95rem;
+     border-radius: 4px;
+     cursor: pointer;
+     transition: var(--transition);
+}
+
+.hero-button:hover {
+     background-color: var(--white);
+     color: var(--primary-color);
+     border-color: var(--white);
+}
+
+/* ==========================================
+   4. 主要內容與標題
+   ========================================== */
+.main-content {
+     max-width: 1100px;
+     margin: 0 auto;
+     padding: 60px 20px;
+}
+
+section {
+     padding: 50px 0;
+}
+
+.section-title {
+     text-align: center;
+     font-size: 1.6rem;
+     color: var(--primary-color);
+     margin-bottom: 45px;
+     font-weight: 700;
+}
+
+/* 日系簡約的小副標裝飾 */
+.section-title::after {
+     content: 'CHARACTERISTIC';
+     display: block;
+     font-size: 0.7rem;
+     color: var(--text-light);
+     letter-spacing: 2px;
+     margin-top: 5px;
+     font-weight: 400;
+}
+
+#news .section-title::after {
+     content: 'NEWS & EVENTS';
+}
+
+/* ==========================================
+   5. 校園特色卡片 (極簡白底細線)
+   ========================================== */
+.cards-container {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+     gap: 30px;
+}
+
+.card {
+     background-color: var(--white);
+     padding: 30px 25px;
+     border-radius: 8px;
+     border: 1px solid var(--border-color);
+     transition: var(--transition);
+}
+
+.card:hover {
+     border-color: var(--accent-color);
+     transform: translateY(-3px);
+}
+
+.card-icon {
+     font-size: 2rem;
+     margin-bottom: 15px;
+     opacity: 0.9;
+}
+
+.card h3 {
+     font-size: 1.15rem;
+     margin-bottom: 10px;
+     color: var(--primary-color);
+     font-weight: 600;
+}
+
+.card p {
+     color: var(--text-light);
+     font-size: 0.9rem;
+     text-align: justify;
+}
+
+/* ==========================================
+   6. 最新消息列表 (筆記本線條感)
+   ========================================== */
+.news-section {
+     background-color: var(--white);
+     border-radius: 8px;
+     border: 1px solid var(--border-color);
+     padding: 0 15px;
+}
+
+.news-item {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 16px 10px;
+     border-bottom: 1px solid var(--border-color);
+}
+
+.news-item:last-child {
+     border-bottom: none;
+}
+
+.news-item:hover .news-title {
+     color: var(--accent-color);
+}
+
+.news-title {
+     font-size: 0.95rem;
+     color: var(--text-dark);
+     cursor: pointer;
+}
+
+.news-date {
+     color: var(--text-light);
+     font-size: 0.85rem;
+     font-family: monospace; /* 讓日期對齊更工整 */
+}
+
+/* ==========================================
+   7. 頁腳 (清爽灰底)
+   ========================================== */
+.footer {
+     background-color: #f8fafc;
+     color: var(--text-light);
+     padding: 50px 20px 30px 20px;
+     border-top: 1px solid var(--border-color);
+     margin-top: 80px;
+}
+
+.footer-content {
+     max-width: 1100px;
+     margin: 0 auto;
+     text-align: center;
+}
+
+.footer h3 {
+     font-size: 1.3rem;
+     color: var(--primary-color);
+     margin-bottom: 20px;
+     font-weight: 700;
+}
+
+.footer-links {
+     display: flex;
+     justify-content: center;
+     gap: 30px;
+     margin-bottom: 25px;
+     flex-wrap: wrap;
+}
+
+.footer-links a {
+     color: var(--text-dark);
+     font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+     color: var(--accent-color);
+}
+
+.footer-text {
+     font-size: 0.85rem;
+     color: var(--text-light);
+     margin-bottom: 6px;
+}
+
+/* ==========================================
+   8. 響應式網頁設計 (RWD)
+   ========================================== */
+@media (max-width: 768px) {
+     .nav-container {
+          flex-direction: column;
+          gap: 12px;
+          padding: 15px;
+     }
+
+     .nav-links {
+          gap: 20px;
+     }
+
+     .hero-section {
+          margin-top: 110px;
+          height: 45vh;
+     }
+
+     .hero-content h1 {
+          font-size: 1.8rem;
+     }
+
+     .hero-content p {
+          font-size: 0.95rem;
+     }
+
+     .news-item {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
+     }
+}
      </style>
 
 </head>
@@ -24,8 +399,8 @@
                     <li><a href="#contact">聯絡方式</a></li>
                </ul>
                <div class="nav-buttons">
-                    <a href="login.php" class="btn-login">登入</a>
-                    <a href="register.php" class="btn-register">註冊</a>
+                    <a href="./login.php" class="btn-login">登入</a>
+                    <a href="./" class="btn-register">註冊</a>
                </div>
           </div>
      </nav>

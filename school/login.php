@@ -19,8 +19,8 @@
                 <li><a href="#contact">聯絡方式</a></li>
             </ul>
             <div class="nav-buttons">
-                <a href="login.php" class="btn-login">登入</a>
-                <a href="register.php" class="btn-register">註冊</a>
+                <a href="./login.php" class="btn-login">登入</a>
+                <a href="./register.php" class="btn-register">註冊</a>
             </div>
         </div>
     </nav>
